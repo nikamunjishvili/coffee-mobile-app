@@ -1,31 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// In App.tsx
+import TabNavigator from './src/navigations/DashboardTabNavigator';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {Provider} from 'react-redux';
+import store from './src/store/store'; // Correct import path
 import {NavigationContainer} from '@react-navigation/native';
-import {HomeScreen} from './src/screens';
-import DetailsScreen from './src/screens/DetailsScreen';
-import PaymentScreen from './src/screens/PaymentScreen';
-import TabNavigator from './src/navigations/TabNavigator';
+import AppProviderLayout from './src/components/layouts/AppProviderLayout';
 
-const stack = createNativeStackNavigator();
-function App(): React.JSX.Element {
+function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <stack.Navigator screenOptions={{headerShown: false}}>
-        <stack.Screen
-          name="details"
-          component={TabNavigator}
-          options={{animation: 'slide_from_bottom'}}></stack.Screen>
-      </stack.Navigator>
-      <stack.Screen
-          name="payment"
-          component={PaymentScreen}
-          options={{animation: 'slide_from_bottom'}}></stack.Screen>
+      <Provider store={store}>
+        <AppProviderLayout />
+      </Provider>
     </NavigationContainer>
   );
 }
